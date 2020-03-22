@@ -24,5 +24,5 @@ public interface BookServiceInt {
 
     Book findBookByTitleAndAuthor(String title, Author author);
 
-    List<Book> findAllBooks();
+    void findAllBooks();
 }

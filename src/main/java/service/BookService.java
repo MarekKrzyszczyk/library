@@ -18,24 +18,43 @@ public class BookService implements BookServiceInt {
         books.put(newBook, numberOfCopies);
     }
 
+    public Boolean checkIfExistSearchingBook(Integer id) {
+        Book bookToLent = findBookById(id);
+        if(!bookToLent.getBookId().equals(null)){
+            return true;
+        }
+        return false;
+    }
+
+    public void addLentBook(Book book) {
+        for (LentBook lentBook : lentBooks.keySet()) {
+            if (lentBook.getTitle().equals(book.getTitle())) {
+                lentBooks.put(lentBook, lentBooks.get(lentBook) + 1);
+            } else {
+                lentBooks.put(lentBook, 1);
+            }
+        }
+    }
+
+    public LentBook bookToLentBook(Integer id, Book book, Customer customer){
+        return new LentBook(id, book.getTitle(), book.getYear(), book.getAuthor(), customer);
+    }
+
     @Override
     public void lentBook(Integer id, Customer customer) {
-        Book bookToLent = findBookById(id);
-        LentBook lentBook = new LentBook(id, bookToLent.getTitle(), bookToLent.getYear(), bookToLent.getAuthor(), customer);
-        System.out.println(lentBook);
-        Integer bookToLentValue = books.get(bookToLent);
-        if (bookToLentValue > 0) {
-            books.put(bookToLent, bookToLentValue - 1);
-            for (LentBook book : lentBooks.keySet()) {
-                if (book.getTitle().equals(bookToLent.getTitle())) {
-                    lentBooks.put(lentBook, lentBooks.get(lentBook) + 1);
-                } else {
+            Book bookToLent = findBookById(id);
+            LentBook lentBook = bookToLentBook(id, bookToLent, customer);
+            Integer bookToLentValue = books.get(bookToLent);
+            if (bookToLentValue > 0) {
+                books.put(bookToLent, bookToLentValue - 1);
+                if (lentBooks.size() == 0) {
                     lentBooks.put(lentBook, 1);
+                } else {
+                    addLentBook(bookToLent);
                 }
+            } else {
+                System.out.println("There is no book to lent");
             }
-        } else {
-            System.out.println("There is no book to lent");
-        }
     }
 
     @Override
@@ -105,12 +124,14 @@ public class BookService implements BookServiceInt {
     }
 
     @Override
-    public List<Book> findAllBooks() {
-        List<Book> allBooks = new ArrayList<>();
-        for (Book book : books.keySet()) {
-            allBooks.add(book);
+    public void findAllBooks() {
+        for (Map.Entry<Book, Integer> entry : books.entrySet()) {
+            if(entry.getValue()>0) {
+                System.out.println(entry.getKey() + " is available for lent");
+            }
+            else {
+                System.out.println(entry.getKey() + " is not available for lent");
+            }
         }
-        System.out.println(allBooks);
-        return allBooks;
     }
 }

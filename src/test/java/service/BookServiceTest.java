@@ -73,16 +73,4 @@ class BookServiceTest {
         Book findedBook = service.findBookByTitleAndAuthor("Inland: A Novel", author);
         assertEquals(book, findedBook);
     }
-
-    @Test
-    void findAllBooks() {
-        Book book = new Book("Inland: A Novel", 2019, new Author("TEA" ,"OBREHT"));
-        Book book2 = new Book("My Lovely Wife", 2019, new Author("SAMANTHA" ,"DOWNING"));
-        service.addBook(book.getTitle(), book.getYear(), book.getAuthor(), 1);
-        service.addBook(book2.getTitle(), book2.getYear(), book2.getAuthor(), 1);
-        List<Book> findedBook = service.findAllBooks();
-        assertEquals(2, findedBook.size());
-        assertEquals(book, findedBook.get(0));
-        assertEquals(book2, findedBook.get(1));
-    }
 }

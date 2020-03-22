@@ -9,4 +9,13 @@ public class LentBook extends BookAbs{
         this.customer = customer;
         this.lentBookId = id;
     }
+
+    @Override
+    public String toString() {
+        return "LentBook{" +
+                "title " + super.getTitle() +
+                ", customer=" + customer +
+                ", lentBookId=" + lentBookId +
+                '}';
+    }
 }
