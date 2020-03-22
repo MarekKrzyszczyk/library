@@ -9,11 +9,6 @@ public class Apps {
 
         BookService service = new BookService();
 
-        service.addBook("American Spy", 2019, new Author("LAUREN", "WILKINSON"), 1);
-        service.addBook("Inland: A Novel", 2018, new Author("TEA", "OBREHT"), 2);
-        service.addBook("My Lovely Wife", 2019, new Author("SAMANTHA", "DOWNING"), 1);
-        service.findAllBooks();
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("1: add new book to library");
         System.out.println("2: lent a book");
@@ -31,7 +26,6 @@ public class Apps {
             System.out.println("Input number of action you want to do: ");
             input = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("input to: " + input);
             switch (input) {
                 case 1:
                     System.out.println("Input title of book: ");
@@ -50,6 +44,7 @@ public class Apps {
                     service.addBook(titleOfNewBook, yearOfNewBook, authorOfNewBook, nbOfCopies);
                     break;
                 case 2:
+                    System.out.println("Input id of book you want to lent: ");
                     Integer idOfLentBook = scanner.nextInt();
                     scanner.nextLine();
                     System.out.println("Input name of Customer: ");
