@@ -80,6 +80,24 @@ public class BookService implements BookServiceInt {
         return new Book();
     }
 
+    public void findBookDetailsById(Integer bookId) {
+        if (checkIfExistSearchingBook(bookId)) {
+            for (Map.Entry<Book, Integer> entry : books.entrySet()) {
+                if (entry.getKey().getBookId().equals(bookId)) {
+                    if (entry.getValue() > 0) {
+                        System.out.println(entry.getKey() + " is available for lent");
+                        printLentBooksDetails(entry);
+                    } else {
+                        System.out.println(entry.getKey() + " is not available for lent");
+                        printLentBooksDetails(entry);
+                    }
+                }
+            }
+        } else {
+            System.out.println("Book with id= " + bookId + " doesn't exist");
+        }
+    }
+
     @Override
     public Book findBookByTitle(String title) {
         for (Book book : books.keySet()) {
