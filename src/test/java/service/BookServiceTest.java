@@ -1,7 +1,6 @@
 package service;
 
 import model.Author;
-import model.Book;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

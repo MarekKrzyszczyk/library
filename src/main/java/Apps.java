@@ -11,10 +11,13 @@ public class Apps {
     service.lentBook(1, new Customer("ktos", "taki"));
     service.lentBook(1, new Customer("inny", "gostek"));
 
+
         System.out.println(BookService.books);
         System.out.println("---------------------------");
         System.out.println(BookService.lentBooks);
         System.out.println("---------------------------");
         service.findAllBooks();
+
+        service.lentBook(3, new Customer("ciekawe", "ktoryto"));
     }
 }
