@@ -18,13 +18,14 @@ public class BookService implements BookServiceInt {
     }
 
     public Boolean checkIfExistSearchingBook(Integer id) {
+        Boolean flag = false;
         try {
             findBookById(id).getBookId();
+            flag = true;
         } catch (NullPointerException e) {
             e.getMessage();
-            return false;
         }
-        return true;
+        return flag;
     }
 
     public boolean addLentBook(Book book, Customer customer) {
@@ -43,7 +44,7 @@ public class BookService implements BookServiceInt {
 
     @Override
     public void lentBook(Integer id, Customer customer) {
-        if (checkIfExistSearchingBook(id)) {
+        try {
             Book bookToLent = findBookById(id);
             Integer bookToLentValue = books.get(bookToLent);
             if (bookToLentValue > 0) {
@@ -56,7 +57,7 @@ public class BookService implements BookServiceInt {
             } else {
                 System.out.println("There is no book in library to lent");
             }
-        } else {
+        } catch (Exception e) {
             System.out.println("There is no book in library to lent");
         }
 
