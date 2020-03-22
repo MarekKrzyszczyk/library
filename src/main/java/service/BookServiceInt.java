@@ -1,26 +1,28 @@
 package service;
 
+import model.Author;
 import model.Book;
 
+import java.util.List;
 import java.util.Set;
 
 public interface BookServiceInt {
 
-    void addBook();
+    void addBook(String title, int year, Author author, int numberOfCopies);
 
-    void lentBook(int id);
+    void lentBook(Integer id);
 
-    void removeBook(int id);
+    void removeBook(Integer id);
 
-    Book findBookById(int bookId);
+    Book findBookById(Integer bookId);
 
     Book findBookByTitle(String title);
 
-    Book findBookByAuthor(String Author);
+    List<Book> findBookByAuthor(Author author);
 
-    Book findBookByYear(int Year);
+    List<Book> findBookByYear(int year);
 
-    Book findBookByTitleAndAuthor(String title, String Author);
+    Book findBookByTitleAndAuthor(String title, Author author);
 
-    Set<Book> findAllBooks();
+    List<Book> findAllBooks();
 }

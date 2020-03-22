@@ -1,8 +1,8 @@
 package model;
 
 public class Customer {
-    private static int id;
-    private int customerId;
+    private static Integer id;
+    private Integer customerId;
     private String name;
     private String lastName;
 
