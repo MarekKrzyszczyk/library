@@ -129,7 +129,7 @@ public class BookService implements BookServiceInt {
     }
 
     @Override
-    public List<Book> findBookByYear(int year) {
+    public List<Book> findBooksByYear(int year) {
         List<Book> booksInYear = new ArrayList<>();
         for (Book book : books.keySet()) {
             if (book.getYear() == year) {

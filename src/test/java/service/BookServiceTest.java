@@ -53,10 +53,10 @@ class BookServiceTest {
     }
 
     @Test
-    void findBookByYear() {
+    void findBooksByYear() {
         Book book = new Book("Inland: A Novel", 2018, new Author("TEA", "OBREHT"));
         service.addBook(book.getTitle(), book.getYear(), book.getAuthor(), 1);
-        List<Book> findedBook = service.findBookByYear(2018);
+        List<Book> findedBook = service.findBooksByYear(2018);
         assertEquals(book, findedBook.get(0));
     }
 
