@@ -7,9 +7,9 @@ public class Apps {
     BookService service = new BookService();
     service.addBook("ksiazka", 2019, new Author("Marek", "Krz"), 3);
     service.lentBook(1, new Customer("ktos", "taki"));
-        service.lentBook(1, new Customer("ktos", "taki"));
-        System.out.println(BookService.books);
-        System.out.println(BookService.lentBooks);
+    service.lentBook(1, new Customer("inny", "gostek"));
+        //System.out.println(BookService.books);
+       // System.out.println(BookService.lentBooks);
         service.findAllBooks();
     }
 }

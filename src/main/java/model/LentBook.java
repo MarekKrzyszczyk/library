@@ -18,4 +18,8 @@ public class LentBook extends BookAbs{
                 ", lentBookId=" + lentBookId +
                 '}';
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
 }
