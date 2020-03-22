@@ -118,7 +118,7 @@ public class BookService implements BookServiceInt {
     }
 
     @Override
-    public List<Book> findBookByAuthor(Author author) {
+    public List<Book> findBooksByAuthor(Author author) {
         List<Book> authorsBooks = new ArrayList<>();
         for (Book book : books.keySet()) {
             if (book.getAuthor().equals(author)) {

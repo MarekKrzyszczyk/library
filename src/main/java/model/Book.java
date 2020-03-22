@@ -3,7 +3,7 @@ package model;
 import java.util.Objects;
 
 public class Book {
-    private static Integer id =1;
+    private static Integer id = 1;
     private Integer bookId;
     private String title;
     private int year;
@@ -34,6 +34,18 @@ public class Book {
 
     public Integer getBookId() {
         return bookId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override

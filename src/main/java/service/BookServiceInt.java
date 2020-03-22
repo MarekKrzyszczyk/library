@@ -18,7 +18,7 @@ public interface BookServiceInt {
 
     Book findBookByTitle(String title);
 
-    List<Book> findBookByAuthor(Author author);
+    List<Book> findBooksByAuthor(Author author);
 
     List<Book> findBookByYear(int year);
 
