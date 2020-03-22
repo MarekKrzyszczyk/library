@@ -2,15 +2,15 @@ package service;
 
 import model.Author;
 import model.Book;
+import model.Customer;
 
 import java.util.List;
-import java.util.Set;
 
 public interface BookServiceInt {
 
     void addBook(String title, int year, Author author, int numberOfCopies);
 
-    void lentBook(Integer id);
+    void lentBook(Integer id, Customer customer);
 
     void removeBook(Integer id);
 

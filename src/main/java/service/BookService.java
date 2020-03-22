@@ -2,12 +2,15 @@ package service;
 
 import model.Author;
 import model.Book;
+import model.Customer;
+import model.LentBook;
 
 import java.util.*;
 
 public class BookService implements BookServiceInt {
 
     public static Map<Book, Integer> books = new HashMap<>();
+    public static Map<LentBook, Integer> lentBooks = new HashMap<>();
 
     @Override
     public void addBook(String title, int year, Author author, int numberOfCopies) {
@@ -16,8 +19,23 @@ public class BookService implements BookServiceInt {
     }
 
     @Override
-    public void lentBook(Integer id) {
-
+    public void lentBook(Integer id, Customer customer) {
+        Book bookToLent = findBookById(id);
+        LentBook lentBook = new LentBook(id, bookToLent.getTitle(), bookToLent.getYear(), bookToLent.getAuthor(), customer);
+        System.out.println(lentBook);
+        Integer bookToLentValue = books.get(bookToLent);
+        if (bookToLentValue > 0) {
+            books.put(bookToLent, bookToLentValue - 1);
+            for (LentBook book : lentBooks.keySet()) {
+                if (book.getTitle().equals(bookToLent.getTitle())) {
+                    lentBooks.put(lentBook, lentBooks.get(lentBook) + 1);
+                } else {
+                    lentBooks.put(lentBook, 1);
+                }
+            }
+        } else {
+            System.out.println("There is no book to lent");
+        }
     }
 
     @Override
@@ -92,6 +110,7 @@ public class BookService implements BookServiceInt {
         for (Book book : books.keySet()) {
             allBooks.add(book);
         }
+        System.out.println(allBooks);
         return allBooks;
     }
 }
