@@ -64,7 +64,13 @@ public class BookService implements BookServiceInt {
 
     @Override
     public void removeBook(Integer id) {
-
+        Book bookToRemoved = findBookById(id);
+        for (Map.Entry<Book, Integer> entry : books.entrySet()) {
+            if (entry.getKey().equals(bookToRemoved) && entry.getValue() > 0) {
+                books.remove(bookToRemoved);
+                System.out.println("Book with id= " + id + " has been removed");
+            }
+        }
     }
 
     @Override

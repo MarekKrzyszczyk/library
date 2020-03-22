@@ -20,13 +20,16 @@ public class Apps {
 //        System.out.println("---------------------------");
 //        service.findAllBooks();
 
-        System.out.println("---------------------------");
-        service.findBookDetailsById(2);
-
-        System.out.println("---------------------------");
-        service.findBookDetailsById(3);
+//        System.out.println("---------------------------");
+//        service.findBookDetailsById(2);
+//
+//        System.out.println("---------------------------");
+//        service.findBookDetailsById(3);
 //        System.out.println("---------------------------");
 //        service.findAllBooks();
-
+    //    service.removeBook(1);
+        service.removeBook(1);
+        service.removeBook(3);
+      //  service.findAllBooks();
     }
 }
