@@ -18,10 +18,13 @@ public class BookService implements BookServiceInt {
     }
 
     public Boolean checkIfExistSearchingBook(Integer id) {
-        if (!findBookById(id).getBookId().equals(null)) {
-            return true;
+        try {
+            findBookById(id).getBookId();
+        } catch (NullPointerException e) {
+            e.getMessage();
+            return false;
         }
-        return false;
+        return true;
     }
 
     public boolean addLentBook(Book book, Customer customer) {
@@ -51,10 +54,10 @@ public class BookService implements BookServiceInt {
                     addLentBook(bookToLent, customer);
                 }
             } else {
-                System.out.println("There is no book to lent");
+                System.out.println("There is no book in library to lent");
             }
         } else {
-            System.out.println("There is no book to lent");
+            System.out.println("There is no book in library to lent");
         }
 
     }

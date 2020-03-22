@@ -10,14 +10,16 @@ public class Apps {
     service.lentBook(2, new Customer("ciekawe", "ktoryto"));
     service.lentBook(1, new Customer("ktos", "taki"));
     service.lentBook(1, new Customer("inny", "gostek"));
+    service.lentBook(1, new Customer("jeszcze", "dziwak"));
+    service.lentBook(1, new Customer("woooo", "iOn?"));
 
-
+        service.checkIfExistSearchingBook(3);
         System.out.println(BookService.books);
         System.out.println("---------------------------");
         System.out.println(BookService.lentBooks);
         System.out.println("---------------------------");
         service.findAllBooks();
 
-        service.lentBook(3, new Customer("ciekawe", "ktoryto"));
+//        service.lentBook(3, new Customer("ciekawe", "ktoryto"));
     }
 }
