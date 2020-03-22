@@ -3,7 +3,6 @@ package service;
 import model.Author;
 import model.Book;
 import model.Customer;
-import model.LentBook;
 
 import java.util.*;
 
@@ -20,44 +19,40 @@ public class BookService implements BookServiceInt {
 
     public Boolean checkIfExistSearchingBook(Integer id) {
         Book bookToLent = findBookById(id);
-        if(!bookToLent.getBookId().equals(null)){
+        if (!bookToLent.getBookId().equals(null)) {
             return true;
         }
         return false;
     }
 
-    public void addLentBook(Book book, Customer customer) {
+    public boolean addLentBook(Book book, Customer customer) {
         for (Book lentBook : lentBooks.keySet()) {
             if (lentBook.getTitle().equals(book.getTitle())) {
                 lentBooks.get(lentBook).add(customer);
                 lentBooks.put(lentBook, lentBooks.get(lentBook));
-            } else {
-                List<Customer> customers = new ArrayList<>();
-                customers.add(customer);
-                lentBooks.put(lentBook, customers);
+                return true;
             }
         }
-    }
-
-    public LentBook changeBookIntoLentBook(Integer id, Book book, Customer customer){
-        return new LentBook(id, book.getTitle(), book.getYear(), book.getAuthor(), customer);
+        List<Customer> customers = new ArrayList<>();
+        customers.add(customer);
+        lentBooks.put(book, customers);
+        return false;
     }
 
     @Override
     public void lentBook(Integer id, Customer customer) {
-            Book bookToLent = findBookById(id);
-          //  LentBook lentBook = changeBookIntoLentBook(id, bookToLent, customer);
-            Integer bookToLentValue = books.get(bookToLent);
-            if (bookToLentValue > 0) {
-                books.put(bookToLent, bookToLentValue - 1);
-                if (lentBooks.size() == 0) {
-                    lentBooks.put(bookToLent, new ArrayList<>(Arrays.asList(customer)));
-                } else {
-                    addLentBook(bookToLent, customer);
-                }
+        Book bookToLent = findBookById(id);
+        Integer bookToLentValue = books.get(bookToLent);
+        if (bookToLentValue > 0) {
+            books.put(bookToLent, bookToLentValue - 1);
+            if (lentBooks.size() == 0) {
+                lentBooks.put(bookToLent, new ArrayList<>(Arrays.asList(customer)));
             } else {
-                System.out.println("There is no book to lent");
+                addLentBook(bookToLent, customer);
             }
+        } else {
+            System.out.println("There is no book to lent");
+        }
     }
 
     @Override
@@ -126,10 +121,10 @@ public class BookService implements BookServiceInt {
         return new Book();
     }
 
-    public void printLentBooksDetails(Map.Entry<Book, Integer> entry){
-        for(Map.Entry<Book, List<Customer>> e : lentBooks.entrySet()){
-            if(entry.getKey().getTitle().equals(e.getKey().getTitle())){
-                System.out.println("copies are lent by:" + e.getValue());;
+    public void printLentBooksDetails(Map.Entry<Book, Integer> entry) {
+        for (Map.Entry<Book, List<Customer>> e : lentBooks.entrySet()) {
+            if (entry.getKey().getTitle().equals(e.getKey().getTitle())) {
+                System.out.println("copies are lent by:" + e.getValue());
             }
         }
     }
@@ -137,19 +132,18 @@ public class BookService implements BookServiceInt {
     @Override
     public void findAllBooks() {
         for (Map.Entry<Book, Integer> entry : books.entrySet()) {
-            if(entry.getValue()>0) {
+            if (entry.getValue() > 0) {
                 System.out.println(entry.getKey() + " is available for lent");
-//                for(Map.Entry<LentBook, Integer> e : lentBooks.entrySet()){
-//                    if(entry.getKey().getTitle().equals(e.getKey().getTitle())){
-//                        System.out.println(e.getValue() + " copies are lent by:" + e.getKey().getCustomer());;
-//                    }
-//                }
-                printLentBooksDetails(entry);
+               // printLentBooksDetails(entry);
             }
-            else {
-                System.out.println(entry.getKey() + " is not available for lent");
-                printLentBooksDetails(entry);
+//            else {
+//                System.out.println(entry.getKey() + " is not available for lent");
+//               // printLentBooksDetails(entry);
+//            }
+        }
+        for (Map.Entry<Book, List<Customer>> e : lentBooks.entrySet()) {
+            //if (entry.getKey().getTitle().equals(e.getKey().getTitle())) {
+                System.out.println("copies are lent by:" + e.getValue());
             }
         }
-    }
 }
